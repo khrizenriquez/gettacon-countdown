@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Gettacon 2016</title>
+    <link rel="stylesheet" href="/css/foundation.min.css" />
+    <style>
+      html {
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRlYmRjMCIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNTNjOWIzIiBzdG9wLW9wYWNpdHk9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjbGVzc2hhdC1nZW5lcmF0ZWQpIiAvPjwvc3ZnPg==);
+        background-image: -webkit-linear-gradient(-45deg, #4ebdc0, #53c9b3);
+        background-image: -moz-linear-gradient(-45deg, #4ebdc0, #53c9b3);
+        background-image: -o-linear-gradient(-45deg, #4ebdc0, #53c9b3);
+        background-image: linear-gradient(135deg, #4ebdc0, #53c9b3);
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        position: relative;
+        text-align: center;
+        padding-top: 100px;
+        color: #E7F7F5;
+        font-family: 'Helvetica Neue', 'Arial';
+        font-weight: 100;
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+      a {
+        display: block;
+        margin-bottom: 1em;
+        color: #E7F7F5;
+        text-decoration: none;
+      }
+      a:last-of-type {
+        font-size: 0.9em;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      ul {
+        margin-bottom: 4em;
+      }
+      .chart {
+        display: inline-block;
+        width: 95px;
+        height: 95px;
+        margin: 0 10px;
+        vertical-align: top;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-top: 22px;
+      }
+      .chart span {
+        display: block;
+        font-size: 2em;
+        font-weight: normal;
+      }
+      .chart canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      </style>
+
+    </head>
+    <link rel="stylesheet" href="/css/app.css" />
+  <body>
+  	<ul>
+  	  <li id="days" class="chart" data-percent="25">
+        <span></span><span></span>
+      </li>
+  	  <li id="hours" class="chart" data-percent="15">
+        <span></span><span></span>
+      </li>
+  	  <li id="minutes" class="chart" data-percent="83">
+        <span></span><span></span>
+      </li>
+  	</ul>
+  <div id="fecha"></div>
+
+  <div class="small reveal" id="gettaconModal" data-reveal data-close-on-esc=false data-close-on-click=false>
+    <h3 class="modal-title">Título</h3>
+    
+    <p class="modal-content">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur id doloribus at aut fuga a nobis velit vel sit. At ad, earum tempora sed autem dolores laboriosam necessitatibus natus dignissimos.
+    </p>
+  </div>
+
+  <script src="/js/vendor/jquery.js"></script>
+  <script src="/js/vendor/what-input.js"></script>
+  <script src="/js/vendor/foundation.js"></script>
+  <script src="/js/app.js"></script>
+
+	<script>
+		/**!
+ * easyPieChart
+ * Lightweight plugin to render simple, animated and retina optimized pie charts
+ *
+ * @license Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ * @author Robert Fleischmann <rendro87@gmail.com> (http://robert-fleischmann.de)
+ * @version 2.0.1
+ **/
+! function() {
+  var a = function(a, b) {
+      var c = document.createElement("canvas");
+      "undefined" != typeof G_vmlCanvasManager && G_vmlCanvasManager.initElement(c);
+      var d = c.getContext("2d");
+      if (c.width = c.height = b.size, a.appendChild(c), window.devicePixelRatio > 1) {
+        var e = window.devicePixelRatio;
+        c.style.width = c.style.height = [b.size, "px"].join(""), c.width = c.height = b.size * e, d.scale(e, e)
+      }
+      d.translate(b.size / 2, b.size / 2), d.rotate((-0.5 + b.rotate / 180) * Math.PI);
+      var f = (b.size - b.lineWidth) / 2;
+      b.scaleColor && b.scaleLength && (f -= b.scaleLength + 2);
+      var g = function(a, b, c) {
+          c = Math.min(Math.max(0, c || 1), 1), d.beginPath(), d.arc(0, 0, f, 0, 2 * Math.PI * c, !1), d.strokeStyle = a, d.lineWidth = b, d.stroke()
+        },
+        h = function() {
+          var a, c, e = 24;
+          d.lineWidth = 1, d.fillStyle = b.scaleColor, d.save();
+          for (var e = 24; e >= 0; --e) 0 === e % 6 ? (c = b.scaleLength, a = 0) : (c = .6 * b.scaleLength, a = b.scaleLength - c), d.fillRect(-b.size / 2 + a, 0, c, 1), d.rotate(Math.PI / 12);
+          d.restore()
+        };
+      Date.now = Date.now || function() {
+        return +new Date
+      };
+      var i = function() {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(a) {
+          window.setTimeout(a, 1e3 / 60)
+        }
+      }();
+      this.clear = function() {
+        d.clearRect(b.size / -2, b.size / -2, b.size, b.size)
+      }, this.draw = function(a) {
+        this.clear(), b.scaleColor && h(), b.trackColor && g(b.trackColor, b.lineWidth), d.lineCap = b.lineCap;
+        var c;
+        c = "function" == typeof b.barColor ? b.barColor(a) : b.barColor, a > 0 && g(c, b.lineWidth, a / 100)
+      }.bind(this), this.animate = function(a, c) {
+        var d = Date.now();
+        b.onStart(a, c);
+        var e = function() {
+          var f = Math.min(Date.now() - d, b.animate),
+            g = b.easing(this, f, a, c - a, b.animate);
+          this.draw(g), b.onStep(a, c, g), f >= b.animate ? b.onStop(a, c) : i(e)
+        }.bind(this);
+        i(e)
+      }.bind(this)
+    },
+    b = function(b, c) {
+      var d, e = {
+          barColor: "#ef1e25",
+          trackColor: "#f9f9f9",
+          scaleColor: "#dfe0e0",
+          scaleLength: 5,
+          lineCap: "round",
+          lineWidth: 3,
+          size: 110,
+          rotate: 0,
+          animate: 1e3,
+          renderer: a,
+          easing: function(a, b, c, d, e) {
+            return (b /= e / 2) < 1 ? d / 2 * b * b + c : -d / 2 * (--b * (b - 2) - 1) + c
+          },
+          onStart: function() {},
+          onStep: function() {},
+          onStop: function() {}
+        },
+        f = {},
+        g = 0,
+        h = function() {
+          this.el = b, this.options = f;
+          for (var a in e) e.hasOwnProperty(a) && (f[a] = c && "undefined" != typeof c[a] ? c[a] : e[a], "function" == typeof f[a] && (f[a] = f[a].bind(this)));
+          f.easing = "string" == typeof f.easing && "undefined" != typeof jQuery && jQuery.isFunction(jQuery.easing[f.easing]) ? jQuery.easing[f.easing] : e.easing, d = new f.renderer(b, f), d.draw(g), b.dataset && b.dataset.percent && this.update(parseInt(b.dataset.percent, 10))
+        }.bind(this);
+      this.update = function(a) {
+        return a = parseInt(a, 10), f.animate ? d.animate(g, a) : d.draw(a), g = a, this
+      }.bind(this), h()
+    };
+  window.EasyPieChart = b
+}();
+
+  var options = {
+    scaleColor: false,
+    trackColor: 'rgba(255,255,255,0.3)',
+    barColor: '#E7F7F5',
+    lineWidth: 6,
+    lineCap: 'butt',
+    size: 95
+  };
+    var charts = [];
+    window.addEventListener('DOMContentLoaded', function () {
+      [].forEach.call(document.querySelectorAll('.chart'), function(el) {
+        console.log(el)
+        charts.push(new EasyPieChart(el, options));
+      });
+    })
+	</script>
+</body>
+</html>

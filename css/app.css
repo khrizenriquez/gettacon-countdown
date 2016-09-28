@@ -1,0 +1,11 @@
+body {
+  background: #16a085;
+}
+
+#gettaconModal .modal-title {
+  color: black;
+}
+#gettaconModal .modal-content {
+  color: black;
+  font-size: 1.5em;
+}
