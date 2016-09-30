@@ -15,7 +15,7 @@ var gettaconStart 	= {},
 
 /*	Colaboración de Edgar Boch*/
 var gettaconCountdown = function () {
-	var deadline = new Date('10/01/2016 18:00 GMT-0800')
+	var deadline = new Date('10/01/2016 18:00 GMT-0600')
     var currentTime = new Date()
     var diff        = deadline - currentTime
     var diff_seg    = Math.floor(diff / 1000)
